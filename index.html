@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sajeeva</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#3b2f23;
+  --card:#f5efe6;
+  --text:#3b2f23;
+  --btn:#2b2118;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:20px;
+}
+
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  margin:20px auto;
+  display:block;
+}
+
+.title{
+  text-align:center;
+  color:#fff;
+  font-size:22px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:20px;
+}
+
+.card img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.card h3{
+  text-align:center;
+  margin:8px 0;
+}
+
+.card p{
+  font-size:13px;
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.btn-wa{
+  width:100%;
+  margin-top:12px;
+  padding:12px;
+  background:var(--btn);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.link-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:12px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:500;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<img src="logo.png" class="logo">
+<div class="title">WELCOME TO SAJEEVA</div>
+
+<!-- RESERVASI -->
+<div class="card">
+  <img src="room.jpg">
+  <h3>RESERVASI / TANYA TANYA</h3>
+  <p>Isi form ini untuk reservasi / tanya tanya</p>
+
+  <input id="reservasi-nama" placeholder="Nama Lengkap">
+  <input id="reservasi-nomor" placeholder="Nomor WhatsApp">
+
+  <button class="btn-wa" onclick="sendWA('reservasi')">
+    Chat via WhatsApp
+  </button>
+</div>
+
+<!-- JOIN US -->
+<div class="card">
+  <img src="join.jpg">
+  <h3>JOIN US</h3>
+  <p>Bergabunglah dengan kami sekarang</p>
+
+  <input id="join-nama" placeholder="Nama Lengkap">
+  <input id="join-nomor" placeholder="Nomor WhatsApp">
+
+  <button class="btn-wa" onclick="sendWA('join')">
+    Chat via WhatsApp
+  </button>
+</div>
+
+<!-- LINKS -->
+<a class="link-btn" href="#">OFFICIAL WEBSITE</a>
+
+<a class="link-btn" href="https://www.tiktok.com/@by.sajeeva?_r=1&_t=ZS-93Yvk7oK91J">TIKTOK</a>
+
+<a class="link-btn" href="https://www.instagram.com/by.sajeeva?igsh=MW5zdXhqejdicmM5Zw==">INSTAGRAM</a>
+
+<a class="link-btn" href="https://www.threads.com/@by.sajeeva">THREADS</a>
+
+<a class="link-btn" href="#">FACEBOOK</a>
+
+</div>
+
+<!-- ===== LOGIC WA + TRACKING ===== -->
+<script>
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbws3VuCepc41CyQ1UGitJoKLtx18vVDBSrjhhbnr231LC5PYRZgjnILPV_E1Pu5dhKh_Q/exec";
+const SOURCE = "tiktok"; // ganti: instagram / threads
+
+function sendWA(button){
+  const nama = document.getElementById(button+"-nama").value.trim();
+  const nomor = document.getElementById(button+"-nomor").value.trim();
+
+  if(!nama || !nomor){
+    alert("Nama dan Nomor WhatsApp wajib diisi");
+    return;
+  }
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      source: SOURCE,
+      button: button,
+      nama: nama,
+      nomor: nomor
+    })
+  }).finally(()=>{
+    const pesan =
+      `Halo Sajeeva, saya ${nama}. Saya lihat postingan di ${SOURCE}. ` +
+      `Boleh tanya info ketersediaan kamar dan fasilitas nya?`;
+
+    const wa = `https://wa.me/6285888588954?text=${encodeURIComponent(pesan)}`;
+    window.location.href = wa;
+  });
+}
+</script>
+
+</body>
+</html>
