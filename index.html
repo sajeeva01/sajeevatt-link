@@ -87,18 +87,16 @@ input{
   cursor:pointer;
 }
 
-.link-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  background:var(--card);
-  padding:14px;
-  border-radius:14px;
+/* BUTTON IMAGE LINKS */
+.img-btn{
+  display:block;
   margin-bottom:12px;
-  text-decoration:none;
-  color:var(--text);
-  font-weight:500;
+}
+
+.img-btn img{
+  width:100%;
+  border-radius:14px;
+  display:block;
 }
 </style>
 </head>
@@ -137,23 +135,33 @@ input{
   </button>
 </div>
 
-<!-- LINKS -->
-<a class="link-btn" href="#">OFFICIAL WEBSITE</a>
+<!-- IMAGE LINKS -->
+<a class="img-btn" href="#">
+  <img src="btn-website.png" alt="Official Website">
+</a>
 
-<a class="link-btn" href="https://www.tiktok.com/@by.sajeeva?_r=1&_t=ZS-93Yvk7oK91J">TIKTOK</a>
+<a class="img-btn" href="https://www.tiktok.com/@by.sajeeva?_r=1&_t=ZS-93Yvk7oK91J">
+  <img src="btn-tiktok.png" alt="TikTok">
+</a>
 
-<a class="link-btn" href="https://www.instagram.com/by.sajeeva?igsh=MW5zdXhqejdicmM5Zw==">INSTAGRAM</a>
+<a class="img-btn" href="https://www.instagram.com/by.sajeeva?igsh=MW5zdXhqejdicmM5Zw==">
+  <img src="btn-instagram.png" alt="Instagram">
+</a>
 
-<a class="link-btn" href="https://www.threads.com/@by.sajeeva">THREADS</a>
+<a class="img-btn" href="https://www.threads.com/@by.sajeeva">
+  <img src="btn-threads.png" alt="Threads">
+</a>
 
-<a class="link-btn" href="#">FACEBOOK</a>
+<a class="img-btn" href="#">
+  <img src="btn-facebook.png" alt="Facebook">
+</a>
 
 </div>
 
 <!-- ===== LOGIC WA + TRACKING ===== -->
 <script>
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbws3VuCepc41CyQ1UGitJoKLtx18vVDBSrjhhbnr231LC5PYRZgjnILPV_E1Pu5dhKh_Q/exec";
-const SOURCE = "tiktok"; // ganti: instagram / threads
+const SOURCE = "threads"; // ganti: tiktok / instagram
 
 function sendWA(button){
   const nama = document.getElementById(button+"-nama").value.trim();
@@ -185,3 +193,4 @@ function sendWA(button){
 
 </body>
 </html>
+
