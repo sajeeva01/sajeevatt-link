@@ -67,6 +67,14 @@ body{
   text-align:center;
 }
 
+input{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
 .btn-wa{
   width:100%;
   margin-top:12px;
@@ -109,7 +117,10 @@ body{
 <div class="card">
   <img src="room.jpg">
   <h3>RESERVASI / TANYA TANYA</h3>
-  <p>Klik untuk chat reservasi</p>
+  <p>Isi boleh, tidak juga tetap bisa chat</p>
+
+  <input id="reservasi-nama" placeholder="Nama Lengkap (Opsional)">
+  <input id="reservasi-nomor" placeholder="Nomor WhatsApp (Opsional)">
 
   <button class="btn-wa" onclick="sendWA('reservasi')">
     Chat via WhatsApp
@@ -120,7 +131,10 @@ body{
 <div class="card">
   <img src="join.jpg">
   <h3>JOIN US</h3>
-  <p>Klik untuk bergabung</p>
+  <p>Bergabunglah dengan kami sekarang</p>
+
+  <input id="join-nama" placeholder="Nama Lengkap (Opsional)">
+  <input id="join-nomor" placeholder="Nomor WhatsApp (Opsional)">
 
   <button class="btn-wa" onclick="sendWA('join')">
     Chat via WhatsApp
@@ -161,14 +175,23 @@ const SOURCE = "tiktok";
 
 function sendWA(button){
 
-  // ===== TRACKING KE GOOGLE SHEET =====
+  const namaField = document.getElementById(button+"-nama");
+  const nomorField = document.getElementById(button+"-nomor");
+
+  const nama = namaField ? namaField.value.trim() : "";
+  const nomor = nomorField ? nomorField.value.trim() : "";
+
+  const finalNama = nama !== "" ? nama : "-";
+  const finalNomor = nomor !== "" ? nomor : "-";
+
+  // ===== TRACKING =====
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
       source: SOURCE,
       button: button,
-      nama: "-",
-      nomor: "-"
+      nama: finalNama,
+      nomor: finalNomor
     })
   }).finally(()=>{
 
