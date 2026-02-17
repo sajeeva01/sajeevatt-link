@@ -67,14 +67,6 @@ body{
   text-align:center;
 }
 
-input{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-
 .btn-wa{
   width:100%;
   margin-top:12px;
@@ -117,10 +109,7 @@ input{
 <div class="card">
   <img src="room.jpg">
   <h3>RESERVASI / TANYA TANYA</h3>
-  <p>Isi form ini untuk reservasi / tanya tanya</p>
-
-  <input id="reservasi-nama" placeholder="Nama Lengkap">
-  <input id="reservasi-nomor" placeholder="Nomor WhatsApp">
+  <p>Klik untuk chat reservasi</p>
 
   <button class="btn-wa" onclick="sendWA('reservasi')">
     Chat via WhatsApp
@@ -131,10 +120,7 @@ input{
 <div class="card">
   <img src="join.jpg">
   <h3>JOIN US</h3>
-  <p>Bergabunglah dengan kami sekarang</p>
-
-  <input id="join-nama" placeholder="Nama Lengkap">
-  <input id="join-nomor" placeholder="Nomor WhatsApp">
+  <p>Klik untuk bergabung</p>
 
   <button class="btn-wa" onclick="sendWA('join')">
     Chat via WhatsApp
@@ -147,7 +133,7 @@ input{
   <span>OFFICIAL WEBSITE</span>
 </a>
 
-<a class="img-btn" href="https://www.tiktok.com/@by.sajeeva?_r=1&_t=ZS-93Yvk7oK91J">
+<a class="img-btn" href="https://www.tiktok.com/@by.sajeeva">
   <img src="btn-tiktok.png">
   <span>TIKTOK</span>
 </a>
@@ -174,30 +160,26 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbws3VuCepc41CyQ1UGitJo
 const SOURCE = "tiktok";
 
 function sendWA(button){
-  const nama = document.getElementById(button+"-nama").value.trim();
-  const nomor = document.getElementById(button+"-nomor").value.trim();
 
-  if(!nama || !nomor){
-    alert("Nama dan Nomor WhatsApp_toggle wajib diisi");
-    return;
-  }
-
+  // ===== TRACKING KE GOOGLE SHEET =====
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
       source: SOURCE,
       button: button,
-      nama: nama,
-      nomor: nomor
+      nama: "-",
+      nomor: "-"
     })
   }).finally(()=>{
 
-    // ===== PESAN WA (SUDAH DIREVISI) =====
+    // ===== PESAN WA =====
     const pesan =
       `Halo Sajeeva, Saya lihat postingan di tiktok. ` +
       `Boleh tanya info ketersediaan kamar dan fasilitas nya?`;
 
-    const wa = `https://wa.me/6285888588954?text=${encodeURIComponent(pesan)}`;
+    const wa =
+      `https://wa.me/6285888588954?text=${encodeURIComponent(pesan)}`;
+
     window.location.href = wa;
   });
 }
