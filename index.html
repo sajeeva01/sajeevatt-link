@@ -87,7 +87,6 @@ input{
   cursor:pointer;
 }
 
-/* ===== IMAGE + TEXT BUTTON ===== */
 .img-btn{
   display:flex;
   align-items:center;
@@ -153,7 +152,7 @@ input{
   <span>TIKTOK</span>
 </a>
 
-<a class="img-btn" href="https://www.instagram.com/by.sajeeva?igsh=MW5zdXhqejdicmM5Zw==">
+<a class="img-btn" href="https://www.instagram.com/by.sajeeva">
   <img src="btn-instagram.png">
   <span>INSTAGRAM</span>
 </a>
@@ -179,7 +178,7 @@ function sendWA(button){
   const nomor = document.getElementById(button+"-nomor").value.trim();
 
   if(!nama || !nomor){
-    alert("Nama dan Nomor WhatsApp wajib diisi");
+    alert("Nama dan Nomor WhatsApp_toggle wajib diisi");
     return;
   }
 
@@ -192,8 +191,10 @@ function sendWA(button){
       nomor: nomor
     })
   }).finally(()=>{
+
+    // ===== PESAN WA (SUDAH DIREVISI) =====
     const pesan =
-      `Halo Sajeeva, saya ${nama}. Saya lihat postingan di ${SOURCE}. ` +
+      `Halo Sajeeva, Saya lihat postingan di tiktok. ` +
       `Boleh tanya info ketersediaan kamar dan fasilitas nya?`;
 
     const wa = `https://wa.me/6285888588954?text=${encodeURIComponent(pesan)}`;
